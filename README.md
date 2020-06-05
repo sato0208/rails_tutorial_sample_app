@@ -1,3 +1,3 @@
-# rails_tutorial_sample_app
+# rails_tutorial
 
-##3章
+## 3章
