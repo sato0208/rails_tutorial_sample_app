@@ -5,13 +5,15 @@ class SessionsController < ApplicationController
 
   def create
       # 送信されたメールアドレスを使って、データベースからユーザーを取り出す
-    user = User.find_by(email: params[:session][:email].downcase)
+    @user = User.find_by(email: params[:session][:email].downcase)
       # ユーザーがデータベースにあり、かつ、認証に成功した場合にのみ
-    if user && user.authenticate(params[:session][:password])
+    if @user && @user.authenticate(params[:session][:password])
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
-      log_in user
-      remember user
-      redirect_to user
+      log_in @user
+      # チェックボックスがオンのときに'1'になり、オフのときに'0'となる
+      params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
+      remember @user
+      redirect_to @user
     else
       # エラーメッセージを作成する
       flash.now[:danger] = 'Invalid email/password combination'
