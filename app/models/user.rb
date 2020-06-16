@@ -11,8 +11,8 @@ class User < ApplicationRecord
                     uniqueness: true
   # セキュアなパスワードの実装のためにメソッドの追加
   has_secure_password
-  # パスワードの存在性と最小文字数のバリデーション
-  validates :password, presence: true, length: { minimum: 6 }
+  # パスワードの存在性と最小文字数のバリデーション(空のままでも更新できる)
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   # 渡された文字列のハッシュ値を返す
   def self.digest(string)
