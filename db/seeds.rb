@@ -8,9 +8,10 @@
 
 # Example Userという名前とメールアドレスを持つユーザを作成
 User.create!(name:  "Example User",
-  email: "  ",
+  email: "example@railstutorial.org",
   password:              "foobar",
-  password_confirmation: "foobar")
+  password_confirmation: "foobar",
+  admin: true)
 
 # それらしい名前とメールアドレスを持つ99人のユーザーを作成
 99.times do |n|
