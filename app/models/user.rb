@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # ユーザーがマイクロポストを複数所有する
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
   # アカウント有効化のコードを追加
   attr_accessor :remember_token, :activation_token, :reset_token
 
