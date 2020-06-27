@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   # ユーザーにログインを要求する
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
   # 編集/更新ページを保護
   before_action :correct_user,   only: [:edit, :update]
   # 管理者だけに限定
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    redirect_to root_url and return unless @user.activated?
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -52,12 +52,6 @@ class UsersController < ApplicationController
 
 
   private
-
-  def user_params
-    params.require(:user).permit(:name, :email, :password,
-                                 :password_confirmation)
-  end
-
   # beforeアクション
 
   # ログイン済みユーザーかどうか確認
@@ -78,5 +72,10 @@ class UsersController < ApplicationController
     # 管理者かどうか確認
     def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
   end
 end

@@ -18,24 +18,6 @@ module SessionsHelper
     end
   end
 
-  # ユーザーがログインしていればtrue、その他ならfalseを返す
-  def logged_in?
-    !current_user.nil?
-  end
-
-  # 現在のユーザーをログアウトする
-  def log_out
-    session.delete(:user_id)
-    @current_user = nil
-  end
-
-  # ユーザーのセッションを永続的にする
-  def remember(user)
-    user.remember
-    cookies.permanent.signed[:user_id] = user.id
-    cookies.permanent[:remember_token] = user.remember_token
-  end
-
   # 渡されたユーザーがログイン済みユーザーであればtrueを返す
   def current_user?(user)
     user == current_user
@@ -52,6 +34,24 @@ module SessionsHelper
         @current_user = user
       end
     end
+  end
+
+  # ユーザーがログインしていればtrue、その他ならfalseを返す
+  def logged_in?
+    !current_user.nil?
+  end
+
+  # 現在のユーザーをログアウトする
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
+
+  # ユーザーのセッションを永続的にする
+  def remember(user)
+    user.remember
+    cookies.permanent.signed[:user_id] = user.id
+    cookies.permanent[:remember_token] = user.remember_token
   end
 
   # 永続的セッションを破棄する
