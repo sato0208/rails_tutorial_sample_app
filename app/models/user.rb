@@ -80,18 +80,18 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+    # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  def feed
+    # Micropostテーブルからuser_idがidのユーザーをすべて取得
+    Micropost.where("user_id = ?", id)
+  end
+
   private
 
   # メールアドレスをすべて小文字にする
   def downcase_email
     self.email.downcase!
-  end
-
-  # 試作feedの定義
-  # 完全な実装は次章の「ユーザーをフォローする」を参照
-  def feed
-    # Micropostテーブルからuser_idがidのユーザーをすべて取得
-    Micropost.where("user_id = ?", id)
   end
 
   # 有効化トークンとダイジェストを作成および代入する
