@@ -8,4 +8,5 @@ class Micropost < ApplicationRecord
   validates :user_id, presence: true
   # Micropostモデルのバリデーション
   validates :content, presence: true, length: { maximum: 140 }
+  validate  :picture_size
 end
