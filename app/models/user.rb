@@ -87,6 +87,13 @@ class User < ApplicationRecord
     self.email.downcase!
   end
 
+  # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  def feed
+    # Micropostテーブルからuser_idがidのユーザーをすべて取得
+    Micropost.where("user_id = ?", id)
+  end
+
   # 有効化トークンとダイジェストを作成および代入する
   def create_activation_digest
     self.activation_token  = User.new_token
