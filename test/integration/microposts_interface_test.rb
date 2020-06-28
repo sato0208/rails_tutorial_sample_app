@@ -5,7 +5,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     # @userにmichaelを代入
     @user = users(:michael)
   end
- 
+
   test "micropost interface" do
     # @userでログイン
     log_in_as(@user)
