@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   # ユーザーがマイクロポストを複数所有する
   has_many :microposts, dependent: :destroy
+  # 能動的関係に対して1対多 (has_many) の関連付けを実装する 
+  has_many :active_relationships, class_name:  "Relationship",
+  foreign_key: "follower_id",
+  dependent:   :destroy
   # アカウント有効化のコードを追加
   attr_accessor :remember_token, :activation_token, :reset_token
 
