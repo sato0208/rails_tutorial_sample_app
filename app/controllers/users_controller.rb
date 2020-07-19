@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # ユーザーにログインを要求する
-  before_action :logged_in_user, only: [:edit, :update, :destroy, :index]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,
+    :following, :followers]
   # 編集/更新ページを保護
   before_action :correct_user,   only: [:edit, :update]
   # 管理者だけに限定
